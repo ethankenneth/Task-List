@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script>
+      //GLOBAL
+      var taskArray = new Array();
+
+
+      function addTask(evt){
+        //alert(evt);
+        var task = document.getElementById('task').value;
+          if (task == "") {
+            return;
+          }//end if task
+        taskArray.push(task);
+
+        document.getElementById('task').value = "";
+        document.getElementById('task').focus();
+        displayTasks();
+      }//end function addTask side note: without quotes in an alert, it will print the entire function
+
+      function removeTask(i){
+        taskArray.splice(i, 1);
+      }//end function removeTask
+
+      function displayTasks(){
+        var tableString = "<table border ='1'>";
+
+        for (var i = 0; i < taskArray.length; i++) {
+          tableString += "<tr>";
+            tableString += "<td>";
+              tableString += taskArray[i];
+            tableString += "</td>";
+            tableString += "<td>";
+              tableString += "<input type = 'button' value = 'remove' onclick = 'removeTask("+i+")/>'";
+            tableString += "</td>";
+
+          tableString += "</tr>";
+        }//end for Loop
+        tableString += "</table>";
+        document.getElementById('tasklist').innerHTML = tableString;
+
+      }//end function displayTasks
+    </script>
+  </head>
+  <body>
+    <div class="page-wrapper">
+
+      <br>
+      <h3>Array and Loop Example</h3>
+
+      <form action="javascript:void(0)" name="todo" id="todo">
+        Task:
+        <input  type="text"
+                size="50"
+                name="task"
+                id="task"
+                onkeydown = "if (event.keyCode == 13)
+                  document.getElementById('addtask').click()"
+                autofocus>
+        <br/>
+        <br/>
+        <input  type="button"
+                name="addtask"
+                id="addtask"
+                value="Add Task"
+                onclick="addTask()">
+      </form>
+
+      <hr>
+      <br><br>
+      <div id="tasklist">
+          The last list will go here.
+      </div><!--end div tasklist-->
+
+    </div><!--end div page-wrapper-->
+  </body>
+</html>
